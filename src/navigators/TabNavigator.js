@@ -9,9 +9,9 @@ const Tab = createBottomTabNavigator();
 export default function TabNavigator() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Add Habit" component={AddHabitScreen} />
-      <Tab.Screen name="Reports" component={ReportsScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
+      <Tab.Screen name="Add Habit" component={AddHabitScreen} options={{ headerShown: false }}/>
+      <Tab.Screen name="Reports" component={ReportsScreen} options={{ headerShown: false }}/>
     </Tab.Navigator>
   );
 }

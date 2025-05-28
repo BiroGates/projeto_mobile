@@ -4,19 +4,20 @@ import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import TabNavigator from './TabNavigator';
 import { AuthContext } from '../contexts/AuthContext';
+import HomeScreen from '../screens/HomeScreen';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator({ screenOptions: { headerStyle: { backgroundColor: 'tomato' }}});
 
 export default function StackNavigator() {
   const { user } = useContext(AuthContext);
 
   return (
     <Stack.Navigator>
-      {user ? (
+      {false ? (
         <Stack.Screen name="Main" component={TabNavigator} options={{ headerShown: false }} />
       ) : (
         <>
-          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
           <Stack.Screen name="SignUp" component={SignUpScreen} />
         </>
       )}
