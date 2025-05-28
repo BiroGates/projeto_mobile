@@ -4,16 +4,19 @@ import { StyleSheet } from 'react-native';
 
 const BiroLogo = () => (
   <View style={styles.container}>
-    <Image source={require('../../assets/BiroLogoDark.png')} />
+    <Image style={styles.image}  resizeMode="contain" source={require('../../assets/BiroLogoDark.png')} />
   </View>
 );
 
 const styles = StyleSheet.create({
+  image: {
+    width: 300,
+    height: 300,
+  },
   container: {
-    flex: 1,
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'blue' 
+    // backgroundColor: 'blue' 
   },
   texto: {
     fontSize: 18,

@@ -3,21 +3,25 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import TabNavigator from './TabNavigator';
-import { AuthContext } from '../contexts/AuthContext';
-import HomeScreen from '../screens/HomeScreen';
+import { CardStyleInterpolators } from '@react-navigation/stack';
+// import { AuthContext } from '../contexts/AuthContext';
 
 const Stack = createNativeStackNavigator({ screenOptions: { headerStyle: { backgroundColor: 'tomato' }}});
 
 export default function StackNavigator() {
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator  
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       {false ? (
-        <Stack.Screen name="Main" component={TabNavigator} options={{ headerShown: false }} />
+        <Stack.Screen name="Main" component={TabNavigator} />
       ) : (
         <>
-          <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
         </>
       )}

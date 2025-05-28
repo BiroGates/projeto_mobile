@@ -4,10 +4,10 @@ import { AuthProvider } from './src/contexts/AuthContext';
 
 export default function App() {
   return (
-    <AuthProvider>
+    // <AuthProvider>
       <NavigationContainer>
         <StackNavigator />
       </NavigationContainer>
-    </AuthProvider>
+    // </AuthProvider>
   );
 }
