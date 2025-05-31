@@ -3,8 +3,8 @@ import { StyleSheet, Text } from 'react-native';
 import { borderRadiusSize, inputDefaultHeight } from '../common/constants';
 import { TouchableOpacity } from 'react-native'; 
 
-const StyledButton = ({ text }) => (
-    <TouchableOpacity style={styles.button} onPress={() => console.log('Clicou!')}>
+const StyledButton = ({ text, handler, wid }) => (
+    <TouchableOpacity style={styles.button} onPress={() => handler()}>
         <Text style={styles.texto}>{ text }</Text>
     </TouchableOpacity>
 );

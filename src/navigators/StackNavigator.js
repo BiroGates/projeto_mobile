@@ -17,7 +17,7 @@ export default function StackNavigator() {
         headerShown: false,
       }}
     >
-      {false ? (
+      {true ? (
         <Stack.Screen name="Main" component={TabNavigator} />
       ) : (
         <>
