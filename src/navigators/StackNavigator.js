@@ -4,6 +4,7 @@ import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import TabNavigator from './TabNavigator';
 import { CardStyleInterpolators } from '@react-navigation/stack';
+import MyAccount from '../screens/MyAccount';
 // import { AuthContext } from '../contexts/AuthContext';
 
 const Stack = createNativeStackNavigator({ screenOptions: { headerStyle: { backgroundColor: 'tomato' }}});

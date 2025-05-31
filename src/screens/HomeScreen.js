@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Modal, Pressable } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Modal, Pressable, TouchableOpacity } from 'react-native';
 import TodoCard from '../components/TodoCard';
 import Header from '../components/Header';
 
@@ -58,14 +58,27 @@ const HomeScreen = () => {
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
             setModalVisible(!modalVisible);
           }}>
           <View style={styles.modalContainer}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>Hello World!</Text>
-              <StyledButton text='hide modal'/>
+                <TouchableOpacity>
+                  <View style={styles.actionsCard}>
+                      <Text> 📊  Estatisticas </Text>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <View style={styles.actionsCard}>
+                      <Text> ✏️  Editar </Text>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <View style={styles.actionsCard}>
+                      <Text> ❌  Excluir </Text>
+                  </View>
+                </TouchableOpacity>
             </View>
+            <StyledButton text='Cancelar' handler={() => setModalVisible(false)}/>  
           </View>
         </Modal>
     </View>
@@ -116,7 +129,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    gap: 20,
   },
+  
+  actionsCard: {
+    width: 300,
+    height: 40,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  }
 });
 
 export default HomeScreen;
