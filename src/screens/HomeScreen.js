@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Modal, Pressable, TouchableOpacity } from 'react-native';
 import TodoCard from '../components/TodoCard';
 import Header from '../components/Header';
 
 import { borderRadiusSize, HASDONE } from '../common/constants';
 import StyledButton from '../components/StyledButton';
+import getTodosById from '../api/getTodosById';
+import { AuthContext } from '../contexts/AuthContext';
 
 const HomeScreen = () => {
+  const { user } = useContext(AuthContext);
   const [modalVisible, setModalVisible] = useState(false);
-  const [data, setData] = useState([
-    { id: '1', todoName: 'Fazer exercicio', hasDone: HASDONE.YES },
-    { id: '2', todoName: 'Codar que nem louco', hasDone: HASDONE.NO },
-    { id: '3', todoName: 'Chorar no banho',  hasDone: HASDONE.IDLE },
-  ]);
+  const [data, setData] = useState([]);
 
   
   // we will need to change this to the api calls, this is just for
@@ -39,6 +38,10 @@ const HomeScreen = () => {
   }
 
 
+  useEffect(async () => {
+    const data = await getTodosById(user.email);
+    setData(data);
+  }, []);
   return (
     <View style={styles.container}>
       <Header />
