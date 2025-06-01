@@ -10,7 +10,7 @@ export default function DailyProgress({
 }) {
   const dias = Array.from({ length: 11 }, (_, i) => {
     const dia = i + 1;
-    console.log(diasStatus);
+    (diasStatus);
     const diaData = diasStatus.find((d) => d.dia === dia);
     return {
       dia,

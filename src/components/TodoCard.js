@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { HASDONE } from '../common/constants';
 
-const TodoCard = ({ id, todoName='fazer um aplicativo completo em uma semana com 19 provas pra estudar', hasDone=undefined, touchCardHandler, setModalVisible }) => {
+const TodoCard = ({ id, todoName, hasDone, touchCardHandler, longPressHandler }) => {
      const limitedText = todoName.length > 50 
         ? todoName.slice(0, 50) + "..." 
         : todoName;
@@ -24,8 +24,8 @@ const TodoCard = ({ id, todoName='fazer um aplicativo completo em uma semana com
  
     return (
         <TouchableOpacity 
-            onPress={() => touchCardHandler(id)} 
-            onLongPress={() => setModalVisible()}
+            onPress={() => touchCardHandler(id, { name: todoName, hasDone })} 
+            onLongPress={() => longPressHandler(id)}
         >
             <View style={styles.container}>
                 <View style={styles.todoIcon}>

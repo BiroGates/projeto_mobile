@@ -11,7 +11,7 @@ export default async function getTodosById(email) {
                 returnData.push({id: doc.id, ...doc.data()});
             }
         });
-        console.log(returnData);
+        (returnData);
         return returnData;
     } catch (e) {
         console.error("Erro ao adicionar documento: ", e);

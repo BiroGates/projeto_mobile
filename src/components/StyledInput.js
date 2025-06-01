@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 import { TextInput } from "react-native";
 import { borderRadiusSize, inputDefaultHeight } from "../common/constants";
 
-const StyledInput = ({ text, passwordField = false, onChangeTextInput }) => (
+const StyledInput = ({ text, passwordField = false, onChangeTextInput, realValue='' }) => (
   <View>
     <Text style={styles.texto}>{text}</Text>
     <TextInput
@@ -12,6 +12,7 @@ const StyledInput = ({ text, passwordField = false, onChangeTextInput }) => (
       placeholder="Digite algo..."
       secureTextEntry={passwordField}
       onChangeText={(text) => onChangeTextInput(text)}
+      value={realValue}
     />
   </View>
 );

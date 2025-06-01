@@ -1,13 +1,13 @@
 import { doc, deleteDoc } from "firebase/firestore";
+import { db } from "../../FireBaseConfig";
 
-// Método para deletar um documento de uma coleção
-async function deletarDocumento(db, caminhoColecao, idDocumento) {
+async function deleteTodo(id) {
   try {
-    const referenciaDoc = doc(db, caminhoColecao, idDocumento);
+    const referenciaDoc = doc(db, 'Todos', id);
     await deleteDoc(referenciaDoc);
     console.log("Documento deletado com sucesso!");
   } catch (erro) {
     console.error("Erro ao deletar documento:", erro);
   }
 }
-export default deletarDocumento;
+export default deleteTodo;

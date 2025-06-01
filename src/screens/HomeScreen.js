@@ -14,18 +14,24 @@ import Header from "../components/Header";
 import { borderRadiusSize, HASDONE } from "../common/constants";
 import StyledButton from "../components/StyledButton";
 import { AuthContext } from "../contexts/AuthContext";
+import getTodosById from "../api/getTodosById";
+import { useFocusEffect } from "@react-navigation/native";
+import { useCallback } from "react";
+import updateTodo from "../api/updateTodo";
+import deleteTodo from "../api/deleteTodo";
+import { Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const HomeScreen = () => {
   const { user } = useContext(AuthContext);
   const [modalVisible, setModalVisible] = useState(false);
-  const [data, setData] = useState([
-    { id: "1", todoName: "Fazer exercicio", hasDone: HASDONE.YES },
-    { id: "2", todoName: "Codar que nem louco", hasDone: HASDONE.NO },
-    { id: "3", todoName: "Chorar no banho", hasDone: HASDONE.IDLE },
-  ]);
+  const [data, setData] = useState([]);
+  const [lastHoldId, setLastHoldId] = useState([]);
+  const [_, forceUpdate] = useState(0);
 
-  // we will need to change this to the api calls, this is just for
-  const touchCardHandler = (id) => {
+  const navigation = useNavigation();
+
+  const touchCardHandler = (id, item) => {
     setData(
       data.map((item) => {
         if (item.id === id) {
@@ -37,24 +43,49 @@ const HomeScreen = () => {
         return item;
       })
     );
+
+    updateTodo(id, { ...item, hasDone: item.hasDone === HASDONE.YES ? HASDONE.NO : HASDONE.YES });
+  
   };
 
   const renderFunction = ({ item }) => {
     return (
       <TodoCard
         id={item.id}
-        todoName={item.todoName}
+        todoName={item.name}
         hasDone={item.hasDone}
         touchCardHandler={touchCardHandler}
-        setModalVisible={setModalVisible}
+        longPressHandler={longPressHandler}
       />
     );
   };
 
-  useEffect(async () => {
-    const data = await getTodosById(user.email);
-    setData(data);
-  }, []);
+  const longPressHandler = (id) => {
+    setModalVisible(true);
+    setLastHoldId(id);
+  }
+
+  const updatePressHandler = () => {
+    navigation.navigate('UpdateHabit', { item: { ...data.find(i => i.id === lastHoldId)}});
+  }
+
+  const deleteHandler = async () => {
+    deleteTodo(lastHoldId)
+    forceUpdate(n => n + 1);
+    Alert.alert("Todo Deletado com sucesso!");
+    setModalVisible(false);
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      const handler = async () => {
+        const data = await getTodosById(user.email);
+        setData(data);
+      }
+      handler();
+
+      return () => {};
+    }, [data]));
   return (
     <View style={styles.container}>
       <Header />
@@ -84,12 +115,12 @@ const HomeScreen = () => {
                 <Text> 📊 Estatisticas </Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => updatePressHandler()}>
               <View style={styles.actionsCard}>
                 <Text> ✏️ Editar </Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => deleteHandler()}>
               <View style={styles.actionsCard}>
                 <Text> ❌ Excluir </Text>
               </View>

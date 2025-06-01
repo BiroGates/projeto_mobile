@@ -20,7 +20,7 @@ const LoginScreen = () => {
             setTimeout(() => null, 3000);
             if (user) navigation.replace("Main");
         }catch(error){
-            console.log(error);
+            (error);
             alert(`Erro ao realizar login: ${error}`);
             return;
         }

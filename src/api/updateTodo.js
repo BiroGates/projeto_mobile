@@ -5,6 +5,7 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
+import { db } from "../../FireBaseConfig";
 
 async function listarDocumentos(db, caminhoColecao) {
   try {
@@ -16,7 +17,7 @@ async function listarDocumentos(db, caminhoColecao) {
       ...doc.data(),
     }));
 
-    console.log("Documentos:", lista);
+    ("Documentos:", lista);
     return lista;
   } catch (erro) {
     console.error("Erro ao listar documentos:", erro);
@@ -24,11 +25,10 @@ async function listarDocumentos(db, caminhoColecao) {
   }
 }
 
-const updateTodo = async (db, todoId, updatedData) => {
+const updateTodo = async (todoId, updatedData) => {
   try {
-    const test = await listarDocumentos(db, "Todos");
-
     const todoRef = doc(db, "Todos", todoId);
+    console.log(todoId, updatedData);
     await updateDoc(todoRef, updatedData, { merge: true });
     console.log("Todo updated successfully");
   } catch (error) {

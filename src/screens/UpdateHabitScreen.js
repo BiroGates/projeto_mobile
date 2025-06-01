@@ -1,5 +1,5 @@
 // CriarHabitoScreen.js
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -14,6 +14,9 @@ import { db } from "../../FireBaseConfig";
 import addTodo from "../api/addTodo";
 import { HASDONE } from "../common/constants";
 import { AuthContext } from "../contexts/AuthContext";
+import { useRoute } from "@react-navigation/native";
+import { useCallback } from "react";
+import updateTodo from "../api/updateTodo";
 
 const categoriasMock = [
   { id: "1", nome: "Estudos", icone: "school" },
@@ -22,21 +25,22 @@ const categoriasMock = [
   { id: "4", nome: "Leitura", icone: "book" },
 ];
 
-export default function CriarHabitoScreen({ navigation, isUpdate = false }) {
+export default function UpdateHabitScreen({ navigation, isUpdate = true }) {
+  const route = useRoute();
+  const { item } = route.params;
+  console.log(item);
   const { user } = useContext(AuthContext);
-  const [habito, setHabito] = useState("");
-  const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
+  const [habito, setHabito] = useState(item.name);
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState(item.category);
   const [dropdownAberto, setDropdownAberto] = useState(false);
 
-  const handleCriar = () => {
+  const handleUpdate = () => {
     try {
-      addTodo({
+      updateTodo(item.id, {
         name: habito,
-        category: categoriaSelecionada ? categoriaSelecionada.nome : "Nenhuma",
-        hasDone: HASDONE.IDLE,
-        email: user.email,
+        category: categoriaSelecionada,
       }); 
-      Alert.alert("Todo Adicionado com sucesso!");
+      Alert.alert("Todo Atualizado com sucesso!");
     } catch(e) {
       Alert.alert("Deu ruim aqui!");
     }
@@ -46,7 +50,7 @@ export default function CriarHabitoScreen({ navigation, isUpdate = false }) {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Hábito</Text>
-      <StyledInput onChangeTextInput={setHabito} text={""} />
+      <StyledInput onChangeTextInput={setHabito} text={''} realValue={habito} />
 
       <Text style={styles.label}>Categoria</Text>
       <Pressable
@@ -54,7 +58,7 @@ export default function CriarHabitoScreen({ navigation, isUpdate = false }) {
         onPress={() => setDropdownAberto(!dropdownAberto)}
       >
         <Text style={styles.dropdownText}>
-          {categoriaSelecionada ? categoriaSelecionada.nome : "Selecione"}
+          {categoriaSelecionada}
         </Text>
         <Ionicons name="chevron-down" size={20} color="black" />
       </Pressable>
@@ -87,7 +91,7 @@ export default function CriarHabitoScreen({ navigation, isUpdate = false }) {
           <Text style={styles.cancelButton}>CANCELAR</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={handleCriar}>
+        <TouchableOpacity onPress={handleUpdate}>
           <Text style={styles.createButton}>
             {isUpdate ? "ATUALIZAR" : "CRIAR"}
           </Text>
