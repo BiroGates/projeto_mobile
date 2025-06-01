@@ -1,17 +1,21 @@
 import React from 'react';
 import { View } from 'react-native';
 import { StyleSheet, Text } from 'react-native';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
-const Header = ({ userName='sdfkjsd' }) => (
+const Header = () => {
+  const { user } = useContext(AuthContext);
+  return (
   <View style={styles.container}>
     <View style={styles.nameIcon}> 
-        <Text style={styles.text}> { userName[0].toUpperCase() } </Text>
+        <Text style={styles.text}> { user.email[0].toUpperCase() } </Text>
     </View>
     <View style={styles.welcomeContainer}> 
-        <Text style={styles.welcomeText}> Boas Vindas, { userName } </Text>
+        <Text style={styles.welcomeText}> Boas Vindas, { user.email } </Text>
     </View>
   </View>
-);
+)};
 
 const styles = StyleSheet.create({
   container: {  

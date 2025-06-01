@@ -16,7 +16,7 @@ const categoriasMock = [
   { id: "2", nome: "Trabalho", icone: "briefcase" },
   { id: "3", nome: "Saúde", icone: "heart" },
   { id: "4", nome: "Leitura", icone: "book" },
-];
+]; 
 
 export default function CriarHabitoScreen({ navigation, isUpdate = false }) {
   const [habito, setHabito] = useState("");
