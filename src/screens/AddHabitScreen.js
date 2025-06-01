@@ -10,13 +10,15 @@ import {
 } from "react-native";
 import StyledInput from "../components/StyledInput";
 import { Ionicons } from "@expo/vector-icons";
+import updateTodo from "../api/updateTodo";
+import { db } from "../../FireBaseConfig";
 
 const categoriasMock = [
   { id: "1", nome: "Estudos", icone: "school" },
   { id: "2", nome: "Trabalho", icone: "briefcase" },
   { id: "3", nome: "Saúde", icone: "heart" },
   { id: "4", nome: "Leitura", icone: "book" },
-]; 
+];
 
 export default function CriarHabitoScreen({ navigation, isUpdate = false }) {
   const [habito, setHabito] = useState("");
@@ -25,7 +27,11 @@ export default function CriarHabitoScreen({ navigation, isUpdate = false }) {
 
   const handleCriar = () => {
     // Navegar tela de inicio
-    console.log({ habito, categoriaSelecionada });
+
+    updateTodo(db, "6-d888-4297-a4cf-6296276cdc2b", {
+      name: habito,
+      categoria: categoriaSelecionada ? categoriaSelecionada.nome : "Nenhuma",
+    });
   };
 
   return (
