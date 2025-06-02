@@ -22,7 +22,7 @@ const categoriasMock = [
   { id: "4", nome: "Leitura", icone: "book" },
 ];
 
-export default function CriarHabitoScreen({ navigation, isUpdate = false }) {
+export default function AddHabitoScreen({ navigation, isUpdate = false }) {
   const { user } = useContext(AuthContext);
   const [habito, setHabito] = useState("");
   const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
@@ -35,18 +35,16 @@ export default function CriarHabitoScreen({ navigation, isUpdate = false }) {
         category: categoriaSelecionada ? categoriaSelecionada.nome : "Nenhuma",
         hasDone: HASDONE.IDLE,
         email: user.email,
-      }); 
+      });
       Alert.alert("Todo Adicionado com sucesso!");
-    } catch(e) {
+    } catch (e) {
       Alert.alert("Deu ruim aqui!");
     }
-
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Hábito</Text>
-      <StyledInput onChangeTextInput={setHabito} text={""} />
+      <StyledInput onChangeTextInput={setHabito} text={"Hábito"} />
 
       <Text style={styles.label}>Categoria</Text>
       <Pressable

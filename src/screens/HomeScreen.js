@@ -7,6 +7,7 @@ import {
   Modal,
   Pressable,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import TodoCard from "../components/TodoCard";
 import Header from "../components/Header";
@@ -14,13 +15,14 @@ import Header from "../components/Header";
 import { borderRadiusSize, HASDONE } from "../common/constants";
 import StyledButton from "../components/StyledButton";
 import { AuthContext } from "../contexts/AuthContext";
-import getTodosById from "../api/getTodosById";
+import { getTodosById } from "../api/getTodosById";
 import { useFocusEffect } from "@react-navigation/native";
 import { useCallback } from "react";
 import updateTodo from "../api/updateTodo";
 import deleteTodo from "../api/deleteTodo";
 import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { auth } from "../../FireBaseConfig";
 
 const HomeScreen = () => {
   const { user } = useContext(AuthContext);
@@ -44,8 +46,10 @@ const HomeScreen = () => {
       })
     );
 
-    updateTodo(id, { ...item, hasDone: item.hasDone === HASDONE.YES ? HASDONE.NO : HASDONE.YES });
-  
+    updateTodo(id, {
+      ...item,
+      hasDone: item.hasDone === HASDONE.YES ? HASDONE.NO : HASDONE.YES,
+    });
   };
 
   const renderFunction = ({ item }) => {
@@ -63,15 +67,17 @@ const HomeScreen = () => {
   const longPressHandler = (id) => {
     setModalVisible(true);
     setLastHoldId(id);
-  }
+  };
 
   const updatePressHandler = () => {
-    navigation.navigate('UpdateHabit', { item: { ...data.find(i => i.id === lastHoldId)}});
-  }
+    navigation.navigate("UpdateHabit", {
+      item: { ...data.find((i) => i.id === lastHoldId) },
+    });
+  };
 
   const deleteHandler = async () => {
-    deleteTodo(lastHoldId)
-    forceUpdate(n => n + 1);
+    deleteTodo(lastHoldId);
+    forceUpdate((n) => n + 1);
     Alert.alert("Todo Deletado com sucesso!");
     setModalVisible(false);
   };
@@ -81,11 +87,12 @@ const HomeScreen = () => {
       const handler = async () => {
         const data = await getTodosById(user.email);
         setData(data);
-      }
+      };
       handler();
 
       return () => {};
-    }, [data]));
+    }, [data])
+  );
   return (
     <View style={styles.container}>
       <Header />
@@ -110,17 +117,32 @@ const HomeScreen = () => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalView}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("ReportScreen");
+                setModalVisible(!modalVisible);
+              }}
+            >
               <View style={styles.actionsCard}>
                 <Text> 📊 Estatisticas </Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => updatePressHandler()}>
+            <TouchableOpacity
+              onPress={() => {
+                updatePressHandler();
+                setModalVisible(!modalVisible);
+              }}
+            >
               <View style={styles.actionsCard}>
                 <Text> ✏️ Editar </Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => deleteHandler()}>
+            <TouchableOpacity
+              onPress={() => {
+                deleteHandler();
+                setModalVisible(!modalVisible);
+              }}
+            >
               <View style={styles.actionsCard}>
                 <Text> ❌ Excluir </Text>
               </View>
@@ -132,6 +154,15 @@ const HomeScreen = () => {
           />
         </View>
       </Modal>
+      <View style={styles.createHabit}>
+        <TouchableOpacity onPress={() => navigation.navigate("AddHabit")}>
+          <Image
+            resizeMode="contain"
+            source={require("../../assets/adicionar.png")}
+            style={{ width: 50, height: 50 }}
+          />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -188,6 +219,12 @@ const styles = StyleSheet.create({
     height: 40,
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
+  },
+
+  createHabit: {
+    width: "90%",
+    padding: 20,
+    alignItems: "flex-end",
   },
 });
 

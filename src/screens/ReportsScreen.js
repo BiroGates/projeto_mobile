@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import CircularProgress from "../components/CircularProgress";
 import MonthlyBarChart from "../components/MonthlyBarProgress";
 import DailyProgress from "../components/DailyProgress";
+import { getTodosById } from "../api/getTodosById";
+import { AuthContext } from "../contexts/AuthContext";
+import { useFocusEffect } from "@react-navigation/native";
 
 const MOCK_DATA_MENSAL = {
   2025: [
@@ -83,9 +86,32 @@ const monthNames = [
 ];
 
 const ReportScreen = () => {
+  const [data, setData] = useState([]);
+  const [todoDones, setTodoDone] = useState([]);
+  const { user } = useContext(AuthContext);
+
+  useFocusEffect(
+    useCallback(() => {
+      const handler = async () => {
+        const data = await getTodosById(user.email);
+        const todoDones = data.filter((item) => item.hasDone === "YES");
+        console.log("Todos:", data);
+        console.log("Todos Feitos:", todoDones);
+        setData(data);
+        setTodoDone(todoDones);
+      };
+      handler();
+
+      return () => {};
+    }, [data])
+  );
+
+  console.log("Itens:>>>>>>>>>>>", data.length);
+
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
   const currentMonth = currentDate.getMonth();
+
   const [month, setMonth] = useState(currentMonth);
   const [monthlyReportYear, setMonthlyReportYear] = useState(currentYear);
   const [reportYear, setReportYear] = useState(currentYear);
@@ -128,7 +154,7 @@ const ReportScreen = () => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <CircularProgress value={5} max={10} />
+        <CircularProgress value={todoDones.length} max={data.length} />
         <DailyProgress
           mes={monthNames[month]}
           ano={monthlyReportYear}

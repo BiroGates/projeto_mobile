@@ -4,15 +4,19 @@ import { StyleSheet } from "react-native";
 import { TextInput } from "react-native";
 import { borderRadiusSize, inputDefaultHeight } from "../common/constants";
 
-const StyledInput = ({ text, passwordField = false, onChangeTextInput, realValue='' }) => (
-  <View>
+const StyledInput = ({
+  text,
+  passwordField = false,
+  onChangeTextInput,
+  placeholder,
+}) => (
+  <View style={{ width: "100%", padding: 5 }}>
     <Text style={styles.texto}>{text}</Text>
     <TextInput
       style={styles.input}
-      placeholder="Digite algo..."
+      placeholder={placeholder ? placeholder : "Digite algo..."}
       secureTextEntry={passwordField}
       onChangeText={(text) => onChangeTextInput(text)}
-      value={realValue}
     />
   </View>
 );
@@ -28,6 +32,7 @@ const styles = StyleSheet.create({
   },
   texto: {
     paddingLeft: 7,
+    marginBottom: 5,
   },
 });
 

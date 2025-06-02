@@ -31,7 +31,9 @@ export default function UpdateHabitScreen({ navigation, isUpdate = true }) {
   console.log(item);
   const { user } = useContext(AuthContext);
   const [habito, setHabito] = useState(item.name);
-  const [categoriaSelecionada, setCategoriaSelecionada] = useState(item.category);
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState(
+    item.category
+  );
   const [dropdownAberto, setDropdownAberto] = useState(false);
 
   const handleUpdate = () => {
@@ -39,27 +41,24 @@ export default function UpdateHabitScreen({ navigation, isUpdate = true }) {
       updateTodo(item.id, {
         name: habito,
         category: categoriaSelecionada,
-      }); 
+      });
       Alert.alert("Todo Atualizado com sucesso!");
-    } catch(e) {
+    } catch (e) {
       Alert.alert("Deu ruim aqui!");
     }
-
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Hábito</Text>
-      <StyledInput onChangeTextInput={setHabito} text={''} realValue={habito} />
+      <StyledInput onChangeTextInput={setHabito} text={""} realValue={habito} />
 
       <Text style={styles.label}>Categoria</Text>
       <Pressable
         style={styles.dropdownButton}
         onPress={() => setDropdownAberto(!dropdownAberto)}
       >
-        <Text style={styles.dropdownText}>
-          {categoriaSelecionada}
-        </Text>
+        <Text style={styles.dropdownText}>{categoriaSelecionada}</Text>
         <Ionicons name="chevron-down" size={20} color="black" />
       </Pressable>
 

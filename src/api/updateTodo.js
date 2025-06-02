@@ -1,29 +1,5 @@
-import {
-  collection,
-  getDocs,
-  setDoc,
-  doc,
-  updateDoc,
-} from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../FireBaseConfig";
-
-async function listarDocumentos(db, caminhoColecao) {
-  try {
-    const colecaoRef = collection(db, caminhoColecao);
-    const snapshot = await getDocs(colecaoRef);
-
-    const lista = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-
-    ("Documentos:", lista);
-    return lista;
-  } catch (erro) {
-    console.error("Erro ao listar documentos:", erro);
-    return [];
-  }
-}
 
 const updateTodo = async (todoId, updatedData) => {
   try {

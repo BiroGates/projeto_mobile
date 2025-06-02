@@ -1,12 +1,12 @@
-import React from 'react';
-import { StyleSheet, Text } from 'react-native';
-import { borderRadiusSize, inputDefaultHeight } from '../common/constants';
-import { TouchableOpacity } from 'react-native'; 
+import React from "react";
+import { StyleSheet, Text } from "react-native";
+import { borderRadiusSize, inputDefaultHeight } from "../common/constants";
+import { TouchableOpacity } from "react-native";
 
-const StyledButton = ({ text, handler, widthSize }) => (
-    <TouchableOpacity style={styles.button} onPress={() => handler()}>
-        <Text style={styles.texto}>{ text }</Text>
-    </TouchableOpacity>
+const StyledButton = ({ text, handler }) => (
+  <TouchableOpacity style={styles.button} onPress={() => handler()}>
+    <Text style={styles.texto}>{text}</Text>
+  </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
@@ -14,13 +14,13 @@ const styles = StyleSheet.create({
     padding: 10,
     height: inputDefaultHeight,
     borderRadius: borderRadiusSize,
-    backgroundColor: '#060ECF',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#060ECF",
+    justifyContent: "center",
+    alignItems: "center",
   },
   texto: {
-    color: 'white'
-  } 
+    color: "white",
+  },
 });
 
 export default StyledButton;

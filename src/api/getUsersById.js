@@ -1,19 +1,18 @@
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../FireBaseConfig";
 
-export async function getTodosById(email) {
+export async function getUsersById(email) {
   try {
-    const querySnapshot = await getDocs(collection(db, "Todos"));
-    const returnData = [];
+    const querySnapshot = await getDocs(collection(db, "Usuarios"));
+    let user;
     querySnapshot.forEach((doc) => {
       const treatedData = doc.data();
       if (treatedData.email === email) {
-        returnData.push({ id: doc.id, ...doc.data() });
+        user = treatedData;
       }
     });
-    returnData;
 
-    return returnData;
+    return user;
   } catch (e) {
     console.error("Erro ao buscar documento: ", e);
   }
