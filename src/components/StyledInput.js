@@ -9,6 +9,7 @@ const StyledInput = ({
   passwordField = false,
   onChangeTextInput,
   placeholder,
+  editable = true,
 }) => (
   <View style={{ width: "100%", padding: 5 }}>
     <Text style={styles.texto}>{text}</Text>
@@ -17,6 +18,7 @@ const StyledInput = ({
       placeholder={placeholder ? placeholder : "Digite algo..."}
       secureTextEntry={passwordField}
       onChangeText={(text) => onChangeTextInput(text)}
+      editable={editable}
     />
   </View>
 );

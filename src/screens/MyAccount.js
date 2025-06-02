@@ -35,9 +35,6 @@ const MyAccount = () => {
       <View style={styles.letterIconTextCircle}>
         <Text style={styles.textLetter}> {nameInitial} </Text>
       </View>
-      <View style={styles.letterIconText}>
-        <Text style={styles.text}> ✏️ Editar </Text>
-      </View>
 
       <View style={styles.inputsContainer}>
         <StyledInput
@@ -49,11 +46,7 @@ const MyAccount = () => {
           text={"Email"}
           placeholder={userData.email}
           onChangeTextInput={setEmail}
-        />
-        <StyledInput
-          text={"Senha"}
-          passwordField={true}
-          placeholder={"••••••••"}
+          editable={false}
         />
       </View>
       <View style={styles.buttons}>
@@ -108,7 +101,8 @@ const styles = StyleSheet.create({
   },
   textLetter: {
     color: "white",
-    fontSize: 25,
+    fontSize: 40,
+    fontWeight: "bold",
   },
   inputsContainer: {
     width: "80%",

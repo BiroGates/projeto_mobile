@@ -58,9 +58,10 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   text: {
-    fontSize: 20,
+    fontSize: 30,
     color: "white",
     textAlign: "center",
+    fontWeight: "bold",
   },
   welcomeContainer: {
     width: 230,
