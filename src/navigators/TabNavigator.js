@@ -22,7 +22,6 @@ export default function TabNavigator() {
             iconName = focused ? "account" : "account-outline";
           }
 
-          // Retorne o componente do ícone dinamicamente
           return (
             <MaterialCommunityIcons name={iconName} size={size} color={color} />
           );

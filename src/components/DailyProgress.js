@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 
 export default function DailyProgress({
-  diasStatus = [], // Array de objetos { dia: número, status: 'done' | 'fail' }
+  diasStatus = [],
   mes = "Maio",
   ano = 2025,
   onPrev,
@@ -10,7 +10,7 @@ export default function DailyProgress({
 }) {
   const dias = Array.from({ length: 11 }, (_, i) => {
     const dia = i + 1;
-    (diasStatus);
+
     const diaData = diasStatus.find((d) => d.dia === dia);
     return {
       dia,
@@ -20,7 +20,6 @@ export default function DailyProgress({
 
   return (
     <View style={styles.wrapper}>
-      {/* Header */}
       <View style={styles.header}>
         <Pressable onPress={onPrev}>
           <FontAwesome name="chevron-left" size={20} color="#000" />
@@ -33,12 +32,9 @@ export default function DailyProgress({
           <FontAwesome name="chevron-right" size={20} color="#000" />
         </Pressable>
       </View>
-
-      {/* Linha de progresso */}
       <View style={styles.diasContainer}>
         {dias.map((item, index) => (
           <View key={index} style={styles.diaItem}>
-            {/* Ícone se houver status */}
             <View style={styles.iconeWrapper}>
               {item.status === "done" && (
                 <View
@@ -55,15 +51,11 @@ export default function DailyProgress({
                 </View>
               )}
             </View>
-            {/* Ponto */}
             <View style={styles.ponto} />
-            {/* Número do dia */}
             <Text style={styles.diaTexto}>{item.dia}</Text>
           </View>
         ))}
       </View>
-
-      {/* Linha base horizontal */}
       <View style={styles.linhaInferior} />
     </View>
   );
@@ -126,7 +118,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   iconeWrapper: {
-    height: 24, // define a altura mínima reservada para o ícone
+    height: 24,
     justifyContent: "center",
     alignItems: "center",
   },

@@ -4,10 +4,7 @@ import BiroLogo from "../components/BiroLogo";
 import StyledInput from "../components/StyledInput";
 import StyledButton from "../components/StyledButton";
 import { useNavigation } from "@react-navigation/native";
-import {
-  createUserWithEmailAndPassword,
-  updateCurrentUser,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../FireBaseConfig";
 import addUser from "../api/addUser";
 
@@ -20,10 +17,9 @@ const SignUpScreen = () => {
 
   const handleSignUp = async () => {
     try {
-      const user = await createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email, password);
 
       setTimeout(() => null, 3000);
-      if (user) navigation.replace("Main");
     } catch (error) {
       error;
       alert(`Erro ao realizar login: ${error}`);
@@ -68,16 +64,13 @@ const SignUpScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     paddingTop: 50,
+    flex: 1,
     justifyContent: "flex-start",
-    gap: 40,
     alignItems: "center",
-    // backgroundColor: 'red',
   },
   welcomeContent: {
     gap: 20,
-    // backgroundColor: 'yellow',
   },
   welcomeText: {
     textAlign: "center",

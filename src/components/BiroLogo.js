@@ -1,10 +1,14 @@
-import React from 'react';
-import { Image, View } from 'react-native';
-import { StyleSheet } from 'react-native';
+import React from "react";
+import { Image, View } from "react-native";
+import { StyleSheet } from "react-native";
 
 const BiroLogo = () => (
   <View style={styles.container}>
-    <Image style={styles.image}  resizeMode="contain" source={require('../../assets/BiroLogoDark.png')} />
+    <Image
+      style={styles.image}
+      resizeMode="contain"
+      source={require("../../assets/BiroLogoDark.png")}
+    />
   </View>
 );
 
@@ -14,13 +18,12 @@ const styles = StyleSheet.create({
     height: 300,
   },
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    // backgroundColor: 'blue' 
+    justifyContent: "center",
+    alignItems: "center",
   },
   texto: {
     fontSize: 18,
-    color: '#333',
+    color: "#333",
   },
 });
 

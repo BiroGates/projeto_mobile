@@ -1,5 +1,5 @@
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../FireBaseConfig";
+import { auth, db } from "../../FireBaseConfig";
 
 export async function getUsersById(email) {
   try {
@@ -11,6 +11,10 @@ export async function getUsersById(email) {
         user = treatedData;
       }
     });
+
+    if (!user) {
+      auth.signOut();
+    }
 
     return user;
   } catch (e) {

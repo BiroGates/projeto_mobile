@@ -22,7 +22,6 @@ import updateTodo from "../api/updateTodo";
 import deleteTodo from "../api/deleteTodo";
 import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { auth } from "../../FireBaseConfig";
 
 const HomeScreen = () => {
   const { user } = useContext(AuthContext);
@@ -176,12 +175,10 @@ const styles = StyleSheet.create({
   todaySection: {
     padding: 20,
     width: "100%",
-    // backgroundColor: 'red'
   },
   todoSection: {
     flex: 1,
     width: "100%",
-    // backgroundColor: 'yellow',
   },
   texto: {
     fontSize: 18,

@@ -16,9 +16,8 @@ const LoginScreen = () => {
 
   const handleLogin = async () => {
     try {
-      const user = await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
       setTimeout(() => null, 3000);
-      if (user) navigation.replace("Main");
     } catch (error) {
       error;
       alert(`Erro ao realizar login: ${error}`);

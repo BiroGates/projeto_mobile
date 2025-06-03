@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, View, Text } from "react-native";
+import { Image, View, Text, KeyboardAvoidingView } from "react-native";
 import { StyleSheet } from "react-native";
 import { TextInput } from "react-native";
 import { borderRadiusSize, inputDefaultHeight } from "../common/constants";
@@ -13,13 +13,15 @@ const StyledInput = ({
 }) => (
   <View style={{ width: "100%", padding: 5 }}>
     <Text style={styles.texto}>{text}</Text>
-    <TextInput
-      style={styles.input}
-      placeholder={placeholder ? placeholder : "Digite algo..."}
-      secureTextEntry={passwordField}
-      onChangeText={(text) => onChangeTextInput(text)}
-      editable={editable}
-    />
+    <KeyboardAvoidingView>
+      <TextInput
+        style={styles.input}
+        placeholder={placeholder ? placeholder : "Digite algo..."}
+        secureTextEntry={passwordField}
+        onChangeText={(text) => onChangeTextInput(text)}
+        editable={editable}
+      />
+    </KeyboardAvoidingView>
   </View>
 );
 

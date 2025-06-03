@@ -7,10 +7,10 @@ const addUser = async (todoData) => {
     const novaRef = doc(collection(db, "Usuarios"));
 
     await setDoc(novaRef, todoData);
-    "Novo todo adicionado com sucesso:", novaRef.id;
+    "Novo usuario adicionado com sucesso:", novaRef.id;
     return novaRef.id;
   } catch (error) {
-    console.error("Erro ao adicionar todo:", error);
+    console.error("Erro ao adicionar usuario:", error);
     return null;
   }
 };

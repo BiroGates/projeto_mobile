@@ -106,8 +106,6 @@ const ReportScreen = () => {
     }, [data])
   );
 
-  console.log("Itens:>>>>>>>>>>>", data.length);
-
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
   const currentMonth = currentDate.getMonth();

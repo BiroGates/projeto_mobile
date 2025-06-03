@@ -7,24 +7,6 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "../../FireBaseConfig";
-import { updateProfile } from "firebase/auth";
-
-export const updateUserProfile = async (auth, updatedData) => {
-  try {
-    const user = auth.currentUser;
-    if (!user) {
-      throw new Error("No user is currently signed in.");
-    }
-
-    console.log("USER>>>>>>>>>>>>>>>>>>", user);
-
-    await updateProfile(user, {
-      ...updatedData,
-    });
-  } catch (error) {
-    console.error("Error updating user profile: ", error);
-  }
-};
 
 export const updateItemByEmailWithSetDoc = async (email, updatedData) => {
   try {

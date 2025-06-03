@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import StyledInput from "../components/StyledInput";
 import { Ionicons } from "@expo/vector-icons";
-import { db } from "../../FireBaseConfig";
 import addTodo from "../api/addTodo";
 import { HASDONE } from "../common/constants";
 import { AuthContext } from "../contexts/AuthContext";
@@ -36,7 +35,7 @@ export default function AddHabitoScreen({ navigation, isUpdate = false }) {
         hasDone: HASDONE.IDLE,
         email: user.email,
       });
-      Alert.alert("Todo Adicionado com sucesso!");
+      Alert.alert("To-do Adicionado com sucesso!");
     } catch (e) {
       Alert.alert("Deu ruim aqui!");
     }

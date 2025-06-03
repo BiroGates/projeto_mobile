@@ -1,11 +1,8 @@
 import LoginScreen from "../screens/LoginScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import TabNavigator from "./TabNavigator";
-import { CardStyleInterpolators } from "@react-navigation/stack";
-import MyAccount from "../screens/MyAccount";
 import React, { useContext } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import AddHabitScreen from "../screens/AddHabitScreen";
 import { AuthContext } from "../contexts/AuthContext";
 
 const Stack = createNativeStackNavigator({

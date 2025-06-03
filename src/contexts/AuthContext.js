@@ -1,6 +1,6 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { auth } from '../../FireBaseConfig.js';
-import { onAuthStateChanged } from 'firebase/auth';
+import React, { createContext, useState, useEffect } from "react";
+import { auth } from "../../FireBaseConfig.js";
+import { onAuthStateChanged } from "firebase/auth";
 
 export const AuthContext = createContext();
 
@@ -15,7 +15,6 @@ export const AuthProvider = ({ children }) => {
     });
     return unsubscribe;
   }, []);
-
 
   return (
     <AuthContext.Provider value={{ user: currentUser, setUser }}>

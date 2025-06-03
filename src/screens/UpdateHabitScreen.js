@@ -10,12 +10,8 @@ import {
 } from "react-native";
 import StyledInput from "../components/StyledInput";
 import { Ionicons } from "@expo/vector-icons";
-import { db } from "../../FireBaseConfig";
-import addTodo from "../api/addTodo";
-import { HASDONE } from "../common/constants";
 import { AuthContext } from "../contexts/AuthContext";
 import { useRoute } from "@react-navigation/native";
-import { useCallback } from "react";
 import updateTodo from "../api/updateTodo";
 
 const categoriasMock = [
@@ -28,7 +24,7 @@ const categoriasMock = [
 export default function UpdateHabitScreen({ navigation, isUpdate = true }) {
   const route = useRoute();
   const { item } = route.params;
-  console.log(item);
+
   const { user } = useContext(AuthContext);
   const [habito, setHabito] = useState(item.name);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState(
@@ -42,7 +38,8 @@ export default function UpdateHabitScreen({ navigation, isUpdate = true }) {
         name: habito,
         category: categoriaSelecionada,
       });
-      Alert.alert("Todo Atualizado com sucesso!");
+      Alert.alert("To-do Atualizado com sucesso!");
+      navigation.goBack();
     } catch (e) {
       Alert.alert("Deu ruim aqui!");
     }
@@ -69,7 +66,7 @@ export default function UpdateHabitScreen({ navigation, isUpdate = true }) {
               key={cat.id}
               style={styles.dropdownItem}
               onPress={() => {
-                setCategoriaSelecionada(cat);
+                setCategoriaSelecionada(cat.nome);
                 setDropdownAberto(false);
               }}
             >
